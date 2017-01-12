@@ -6,17 +6,25 @@ __author__ = "Praveen SVSRK"
 class DFA:
 
     def __init__(self, *states):
+        self._initial = None
         self._transitions = {}
         for state in states:
             self.addState(state)
         print "DFA Created"
 
-    def addState(self, state):
+    def add_state(self, state, initial=False):
         if not isinstance(state, State):
             raise TypeError("State must be of type 'State'")
+        if state in self._transitions:
+            raise ValueError("State {0} already exists".format(state))
         self._transitions[state] = list()
+        if initial:
+            if self._initial is None:
+                self._initial = state
+            else:
+                raise ValueError("Initial state already exists")
 
-    def addTransition(self, old, input, new):
+    def add_transition(self, old, input, new):
         if not isinstance(old, State) or not isinstance(new, State):
             raise TypeError("State must be of type 'State'")
         if not isinstance(input, str):
@@ -39,11 +47,10 @@ class DFA:
             else:
                 self._transitions[old].append(tuple((input, new)))
 
-    def delTransition(self):
-        pass
+    def del_transition(self):
         pass
 
-    def printTransitions(self):
+    def print_transitions(self):
         for state in self._transitions:
             print state, ":", self._transitions[state]
 
@@ -60,12 +67,12 @@ class NFA:
         self.transitions = {}
         print "NFA Created"
 
-    def addState(self, name):
+    def add_state(self, name):
         if not isinstance(name, str):
             raise TypeError("State must be a string")
         self.transitions[name] = list()
 
-    def addTransition(self, old, input, new):
+    def add_transition(self, old, input, new):
         if not isinstance(old, str) or not isinstance(new, str):
             raise TypeError("State must be a string")
         if not isinstance(input, str):
@@ -85,10 +92,10 @@ class NFA:
             else:
                 self.transitions[old].append(tuple((input, new)))
 
-    def delTransition(self):
+    def del_transition(self):
         pass
 
-    def printTransitions(self):
+    def print_transitions(self):
         for state in self.transitions:
             print state, ":", self.transitions[state]
 
