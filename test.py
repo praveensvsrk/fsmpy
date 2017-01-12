@@ -1,13 +1,15 @@
-from fsmpy import pysm
+from fsmpy import fsmpy
+from fsmpy import State
 
-s = pysm.StateMachine('deterministic')
+s = fsmpy.DFA()
 
-s.addState("1")
-s.addState("0")
+a = State.State("0")
+b = State.State("1")
 
-s.addTransition("1", "a", "0")
-s.printTransitions()
-s.addTransition("1", "b", "0")
-s.addTransition("1", "b", "1")
+s.addState(a)
+s.addState(b)
+
+s.addTransition(a, "a", b)
+s.addTransition(b, "b", a)
 
 s.printTransitions()
