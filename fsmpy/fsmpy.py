@@ -41,6 +41,7 @@ class DFA:
 
     def delTransition(self):
         pass
+        pass
 
     def printTransitions(self):
         for state in self._transitions:
