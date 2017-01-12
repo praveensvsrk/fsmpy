@@ -1,6 +1,6 @@
-import StateMachine
+from fsmpy import pysm
 
-s = StateMachine.StateMachine('deterministic')
+s = pysm.StateMachine('deterministic')
 
 s.addState("1")
 s.addState("0")
